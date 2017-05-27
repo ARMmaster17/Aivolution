@@ -25,6 +25,8 @@ namespace aibio
             {
                 base.Draw();
             }
+
+            public abstract void Activate(double activationValue);
         }
     }
 }
