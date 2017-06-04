@@ -3,29 +3,44 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace aibio
 {
-    namespace units
+    namespace Units
     {
-        public abstract class Sensor : Biopart
+        namespace Sensors
         {
-            public Sensor() : base()
+            public abstract class Sensor : Biopart
             {
-                
-            }
+                /// <summary>
+                /// Location of Sensor object relative to center position
+                /// of organism.
+                /// </summary>
+                private Point _sensorLocation;
 
-            public abstract double GetImpulseValue();
+                protected Sensor() : base()
+                {
 
-            public override void Update()
-            {
-                // Do sensing stuff.
-                base.Update();
-            }
+                }
 
-            public override void Draw()
-            {
-                base.Draw();
+                protected Sensor(Point sensorOffsetFromCenter) : base()
+                {
+                    _sensorLocation = sensorOffsetFromCenter;
+                }
+
+                public abstract double GetImpulseValue();
+
+                public override void Update(Point organismCenter)
+                {
+                    // Do sensing stuff.
+                    base.Update(organismCenter);
+                }
+
+                public override void Draw(ref Graphics g, Point organismCenter)
+                {
+                    base.Draw(ref g, organismCenter);
+                }
             }
         }
     }

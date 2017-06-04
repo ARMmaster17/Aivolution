@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using aibio.units;
+using aibio.Units.Sensors;
+using aibio.Units.Motors;
 using ainet;
 
 namespace aibio
@@ -64,7 +66,8 @@ namespace aibio
         {
             foreach (Sensor t in _sensors)
             {
-                t.Update();
+                // TODO: Replace with organism center coordinates.
+                t.Update(new Point(0, 0));
             }
         }
 

@@ -12,7 +12,7 @@ namespace aibio
 {
     public partial class WorldView : UserControl
     {
-        private bool _viewDragMode = false;
+        private bool _viewDragMode;
         private Bitmap _fullWorldView;
         private Point _viewBaseCoord;
         private Point _lastMousePosition;
