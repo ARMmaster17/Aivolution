@@ -7,6 +7,7 @@ using Accord.IO;
 using Accord.Neuro;
 using Accord.Neuro.Learning;
 using Accord.Neuro.Networks;
+using Accord.Statistics;
 
 namespace ainet
 {

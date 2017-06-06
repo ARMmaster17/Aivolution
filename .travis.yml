@@ -2,3 +2,7 @@ language: csharp
 solution: aivolution.sln
 mono:
   - latest
+script:
+  - xbuild /p:Configuration=Release aivolution.sln
+  - mono ./packages/NUnit.Runners.*/tools/nunit-console.exe ./aibio.Tests/bin/Release/aibio.Tests.dll
+  - mono ./packages/NUnit.Runners.*/tools/nunit-console.exe ./aibio.Tests/bin/Release/ainet.Tests.dll
