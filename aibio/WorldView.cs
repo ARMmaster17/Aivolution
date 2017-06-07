@@ -27,6 +27,7 @@ namespace aibio
         {
             _lastMousePosition = MousePosition;
             _viewDragMode = true;
+            RedrawWorld();
         }
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
@@ -42,16 +43,33 @@ namespace aibio
             _viewBaseCoord += (Size) deltaMousePosition;
             // Cycle _lastMousePosition for the next movement calculation.
             _lastMousePosition = currentMousePosition;
+            // Refresh the draw surface.
+            RedrawWorld();
         }
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
             _viewDragMode = false;
+            RedrawWorld();
         }
 
         private void WorldView_Load(object sender, EventArgs e)
         {
             this.Dock = DockStyle.Fill;
+            RedrawWorld();
+        }
+
+        private void RedrawWorld()
+        {
+            Bitmap bufferBitmap = new Bitmap(100, 100);
+            Graphics g = Graphics.FromImage(bufferBitmap);
+            g.Clear(Color.Black);
+            g.FillRectangle(Brushes.Red, 50, 50, 20, 20);
+            Graphics g2 = Graphics.FromImage(_fullWorldView);
+            g2.DrawImage(bufferBitmap, new Rectangle(0, 0, pictureBox1.Width, pictureBox1.Height), new Rectangle(_viewBaseCoord, new Size(pictureBox1.Width, pictureBox1.Height)), GraphicsUnit.Pixel);
+            pictureBox1.Image = _fullWorldView;
+            // Invalidate the control so it gets redrawn.
+            pictureBox1.Invalidate();
         }
     }
 }

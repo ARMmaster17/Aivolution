@@ -29,7 +29,7 @@ namespace aibio
                     base.Draw(ref g, organismCenter);
                 }
 
-                public abstract void Activate(double activationValue);
+                public abstract void Activate(double activationValue, ref Point organismLocation);
             }
         }
     }

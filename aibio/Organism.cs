@@ -20,12 +20,15 @@ namespace aibio
         private double[] _previousSensorInputs;
         private double[] _previousMotorOutputs;
 
-        public Organism(Sensor[] sensors, Motor[] motors, int complexity = 20)
+        private Point _worldLocation;
+
+        public Organism(Point location, Sensor[] sensors, Motor[] motors, int complexity = 20)
         {
             _brainNetwork = new Network(sensors.Length, motors.Length, complexity);
             _sensors = sensors;
             _motors = motors;
             _previousSurvivability = 0;
+            _worldLocation = location;
         }
 
         /// <summary>
@@ -66,8 +69,7 @@ namespace aibio
         {
             foreach (Sensor t in _sensors)
             {
-                // TODO: Replace with organism center coordinates.
-                t.Update(new Point(0, 0));
+                t.Update(_worldLocation);
             }
         }
 
@@ -98,7 +100,7 @@ namespace aibio
             // as we are conistant. The ANN should be able to figure out the rest itself.
             for (int i = 0; i < _motors.Length; i++)
             {
-                _motors[i].Activate(motorActivationValues[i]);
+                _motors[i].Activate(motorActivationValues[i], ref _worldLocation);
             }
         }
 
