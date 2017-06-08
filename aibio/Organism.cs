@@ -84,7 +84,7 @@ namespace aibio
             // Iterate through all sensors, getting their impulse values.
             for (int i = 0; i < _sensors.Length; i++)
             {
-                result[i] = _sensors[i].GetImpulseValue();
+                result[i] = _sensors[i].GetImpulse();
             }
             // Return result as a double array.
             return result;

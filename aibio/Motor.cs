@@ -13,6 +13,10 @@ namespace aibio
         {
             public abstract class Motor : Biopart
             {
+                private double _activationValue;
+                private double _minSpeed;
+                private double _maxSpeed;
+
                 public Motor() : base()
                 {
 
@@ -29,7 +33,28 @@ namespace aibio
                     base.Draw(ref g, organismCenter);
                 }
 
-                public abstract void Activate(double activationValue, ref Point organismLocation);
+                public virtual void Activate(double activationValue, ref Point organismLocation)
+                {
+                    if(activationValue >= 0.0f)
+                        _activationValue = Math.Min(activationValue, 1.0f);
+                    else
+                        _activationValue = Math.Max(activationValue, -1.0f);
+                }
+
+                public double GetActivationValue()
+                {
+                    return _activationValue;
+                }
+
+                /// <summary>
+                /// Calculates pain caused by current movements on a scale of 1-10.
+                /// For regular Motor implementation, max pain that can be caused is from 0-2;
+                /// </summary>
+                /// <returns></returns>
+                public virtual double CalculatePainIndex()
+                {
+                    return Math.Abs(_activationValue)*10/5;
+                }
             }
         }
     }
