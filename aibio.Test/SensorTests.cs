@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,25 +22,37 @@ namespace aibio.Test
         }
 
         [Test]
-        public void SensorImpulse()
+        public void SensorImpulseDefault()
         {
             // Initialize test object using fixture since it's an abstract class.
             SensorFixture s = new SensorFixture();
-            // Test default value.
+            // Test default value of Sensor class instance.
             Assert.That(s.GetImpulse(), Is.EqualTo(0.0f));
-            // Test set function.
-            s.SetImpulse(0.5f);
-            Assert.That(s.GetImpulse(), Is.EqualTo(0.5f));
-            // Test upper and lower limits.
-            s.SetImpulse(1.0f);
-            Assert.That(s.GetImpulse(), Is.EqualTo(1.0f));
-            s.SetImpulse(0.0f);
-            Assert.That(s.GetImpulse(), Is.EqualTo(0.0f));
-            // Test normalization values.
-            s.SetImpulse(1.1f);
-            Assert.That(s.GetImpulse(), Is.EqualTo(1.0f));
-            s.SetImpulse(-0.1f);
-            Assert.That(s.GetImpulse(), Is.EqualTo(0.0f));
+        }
+
+        [Test, TestCaseSource(typeof(SensorTestsData), nameof(SensorTestsData.SensorTestCases))]
+        public double SensorImpulse(double testImpulseValue)
+        {
+            // Initialize test object using fixture since it's an abstract class.
+            SensorFixture s = new SensorFixture();
+            // Run against given arguments.
+            s.SetImpulse(testImpulseValue);
+            return s.GetImpulse();
+        }
+    }
+
+    public class SensorTestsData
+    {
+        public static IEnumerable SensorTestCases
+        {
+            get
+            {
+                yield return new TestCaseData(-0.1f).Returns(0.0f);
+                yield return new TestCaseData(0.0f).Returns(0.0f);
+                yield return new TestCaseData(0.5f).Returns(0.5f);
+                yield return new TestCaseData(1.0f).Returns(1.0f);
+                yield return new TestCaseData(1.1f).Returns(1.0f);
+            }
         }
     }
 

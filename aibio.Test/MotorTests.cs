@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using aibio.Test.Fixtures;
 using aibio.Units.Motors;
 using NUnit.Framework;
+using System.Collections;
 
 namespace aibio.Test
 {
@@ -20,29 +21,31 @@ namespace aibio.Test
             Assert.IsNotNull(m);
         }
 
-        [Test]
-        public void MotorActivate()
+        [Test, TestCaseSource(typeof(MotorTestsData), nameof(MotorTestsData.MotorActivateTestCases))]
+        public double MotorActivate(double activationValue)
         {
             MotorFixture m = new MotorFixture();
             Point p = new Point(0, 0);
 
-            m.Activate(0.0f, ref p);
-            Assert.That(m.GetActivationValue(), Is.EqualTo(0.0f));
+            m.Activate(activationValue, ref p);
+            return m.GetActivationValue();
+        }
+    }
 
-            m.Activate(1.0f, ref p);
-            Assert.That(m.GetActivationValue(), Is.EqualTo(1.0f));
-
-            m.Activate(1.1f, ref p);
-            Assert.That(m.GetActivationValue(), Is.EqualTo(1.0f));
-
-            m.Activate(-0.1f, ref p);
-            Assert.That(m.GetActivationValue(), Is.EqualTo(-0.1f));
-
-            m.Activate(-1.0f, ref p);
-            Assert.That(m.GetActivationValue(), Is.EqualTo(-1.0f));
-
-            m.Activate(-1.1f, ref p);
-            Assert.That(m.GetActivationValue(), Is.EqualTo(-1.0f));
+    public class MotorTestsData
+    {
+        public static IEnumerable MotorActivateTestCases
+        {
+            get
+            {
+                yield return new TestCaseData(-1.1f).Returns(-1.0f);
+                yield return new TestCaseData(-1.0f).Returns(-1.0f);
+                yield return new TestCaseData(-0.1f).Returns(-0.1f);
+                yield return new TestCaseData(0.0f).Returns(0.0f);
+                yield return new TestCaseData(0.5f).Returns(0.5f);
+                yield return new TestCaseData(1.0f).Returns(1.0f);
+                yield return new TestCaseData(1.1f).Returns(1.0f);
+            }
         }
     }
 
