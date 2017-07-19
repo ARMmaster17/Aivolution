@@ -30,8 +30,8 @@
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.worldView1 = new aibio.WorldView();
             this.button1 = new System.Windows.Forms.Button();
+            this.worldView1 = new aibio.WorldView();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -63,14 +63,6 @@
             this.splitContainer1.SplitterDistance = 592;
             this.splitContainer1.TabIndex = 1;
             // 
-            // worldView1
-            // 
-            this.worldView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.worldView1.Location = new System.Drawing.Point(0, 0);
-            this.worldView1.Name = "worldView1";
-            this.worldView1.Size = new System.Drawing.Size(592, 537);
-            this.worldView1.TabIndex = 0;
-            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(3, 3);
@@ -79,6 +71,15 @@
             this.button1.TabIndex = 0;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // worldView1
+            // 
+            this.worldView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.worldView1.Location = new System.Drawing.Point(0, 0);
+            this.worldView1.Name = "worldView1";
+            this.worldView1.Size = new System.Drawing.Size(592, 537);
+            this.worldView1.TabIndex = 0;
             // 
             // Form1
             // 

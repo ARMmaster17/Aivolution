@@ -16,5 +16,11 @@ namespace aivolution
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // Test functionality
+            //worldView1.
+        }
     }
 }
