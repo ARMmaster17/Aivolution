@@ -48,7 +48,7 @@ namespace aibio
             // Calculate delta by finding the difference between the two points.
             Point deltaMousePosition = Point.Subtract(currentMousePosition, (Size) _lastMousePosition);
             // Use delta value to modify viewport center relative to the world.
-            _viewBaseCoord = Point.Add(_viewBaseCoord, (Size) deltaMousePosition);
+            _viewBaseCoord = Point.Subtract(_viewBaseCoord, (Size) deltaMousePosition);
             // Cycle _lastMousePosition for the next movement calculation.
             _lastMousePosition = currentMousePosition;
             // Refresh the draw surface.
